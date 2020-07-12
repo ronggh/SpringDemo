@@ -20,6 +20,7 @@ public class TestSpringDemo {
         System.out.println(user.toString());
         user.add();
 
+
         User user1 = context.getBean("user1",User.class);
         System.out.println(user1.toString());
     }
