@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- Spring 创建对象-->
+    <bean id="user" class="springdemo.User">
+        <!-- 注入属性 -->
+        <property name="userName" value="Tom"></property>
+        <property name="age" value="30"></property>
+        <!-- 设置null值 -->
+        <!--<property name="address">-->
+            <!--<null/>-->
+        <!--</property>-->
+        <!-- 属性中包含特殊字符 -->
+        <!-- 如<> 可以使用&lt;&gt;若使用XML中的CDATA结构
+         <![CDATA[内容会原样输出]]>
+         -->
+        <property name="address">
+            <value><![CDATA[<<南京>>]]></value>
+        </property>
+    </bean>
+
+    <!-- 有参构造函数 -->
+    <bean id="user1" class="springdemo.User">
+        <constructor-arg name="userName" value="Peter"/>
+        <constructor-arg name="age" value="50"/>
+    </bean>
+</beans>
