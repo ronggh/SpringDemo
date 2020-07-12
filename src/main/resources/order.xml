@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- Spring 创建对象-->
+    <!--
+        init-method 属性来定义要调用的初始化方法
+        destroy-method 属性来定义要调用销毁的方法
+    -->
+    <bean id="order" class="beanperiod.Order" init-method="initMethod" destroy-method="destroyMethod">
+        <property name="orderName" value="mobile20305678"></property>
+    </bean>
+
+
+</beans>

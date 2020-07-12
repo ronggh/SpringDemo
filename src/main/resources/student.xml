@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="student" class="collectiontype.Student">
+        <!-- 属性 -->
+        <property name="name" value="John"/>
+
+        <!-- 数组类型的属性注入，使用array -->
+        <property name="courses">
+            <array>
+                <value>Java语言</value>
+                <value>C语言</value>
+                <value>HTML语言</value>
+            </array>
+        </property>
+
+        <!-- List类型的属性注入，使用list -->
+        <property name="lists">
+            <list>
+                <value>中文</value>
+                <value>English</value>
+            </list>
+        </property>
+        <!-- Map类型的属性，使用map,entry,key value -->
+        <property name="maps">
+           <map>
+               <entry key="java" value="java编程"></entry>
+               <entry key="cpp" value="CPP编程"></entry>
+           </map>
+        </property>
+
+        <!-- Set类型的属性注入，使用set -->
+        <property name="sets">
+            <set>
+                <value>MySQL</value>
+                <value>Redis</value>
+            </set>
+        </property>
+
+        <!-- 注入的List集合属性中，是自定义的类 -->
+        <property name="courseList">
+            <list>
+                <ref bean="course1"></ref>
+                <ref bean="course2"></ref>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 创建多个Course对象 -->
+    <bean id="course1" class="collectiontype.Course">
+        <property name="courseId" value="1"></property>
+        <property name="courseName" value="Spring"></property>
+    </bean>
+    <bean id="course2" class="collectiontype.Course">
+        <property name="courseId" value="2"></property>
+        <property name="courseName" value="Spring MVC"></property>
+    </bean>
+</beans>

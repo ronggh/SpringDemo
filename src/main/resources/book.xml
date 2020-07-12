@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 将集合属性提取出来，需要引入util命名空间 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <!-- 提取List集合属性 -->
+    <util:list id="bookList">
+        <value>Java编程思想</value>
+        <value>Java从入门到精通</value>
+        <value>Java设计模式</value>
+    </util:list>
+    <!-- bean 中的属性scope 可以用来设置创建的对象是单实例（默认），还是多实例
+        singleton：单实例，默认
+        prototype:多实例
+     -->
+    <bean id="book" class="collectiontype.Book" scope="prototype">
+        <!-- List类型的属性注入 -->
+        <property name="lists" ref="bookList"/>
+    </bean>
+</beans>
