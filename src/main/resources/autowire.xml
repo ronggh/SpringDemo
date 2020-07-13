@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- Spring 创建对象-->
+    <!--
+        自动装配
+        autowire属性：
+            byName:bean 的id值要与类中属性名称相同
+            byType:相同类型的bean只能有一个，不能多个，多个就无法进行一一对应了，不知道要使用哪一个
+    -->
+    <bean id="emp" class="autowire.Emp" autowire="byName">
+        <!--<property name="dept" ref="dept"></property>-->
+    </bean>
+
+    <bean id="dept" class="autowire.Dept"></bean>
+
+</beans>

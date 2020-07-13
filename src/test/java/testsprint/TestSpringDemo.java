@@ -1,14 +1,19 @@
 package testsprint;
 
+import aop.aspectj.annotate.AopConfig;
+import aop.aspectj.annotate.Person;
+import aop.aspectj.xml.AopBook;
+import cn.annotate.config.SpringConfig;
+import cn.annotate.service.UserService2;
 import beanperiod.Order;
 import collectiontype.Book;
 import collectiontype.Course;
 import collectiontype.Student;
-import factorybean.MyBean;
 import org.junit.Test;
 
 import org.springframework.context.ApplicationContext;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import service.UserService;
@@ -97,6 +102,65 @@ public class TestSpringDemo {
 
         // 手动销毁Bean
         ((ClassPathXmlApplicationContext) context).close();
+    }
+
+    @Test
+    public void testAutowire(){
+        // 1. 加载Spring配置文件
+        ApplicationContext context = new ClassPathXmlApplicationContext("autowire.xml");
+        // 2. 获取Spring配置文件中创建的对象
+        autowire.Emp emp = context.getBean("emp", autowire.Emp.class);
+        System.out.println(emp);
+        emp.test();
+    }
+
+    @Test
+    public void testAnnotate(){
+        // 1. 加载Spring配置文件
+        ApplicationContext context = new ClassPathXmlApplicationContext("annotate.xml");
+        // 2. 获取Spring配置文件中创建的对象
+        UserService2 userService2= context.getBean("userService2", UserService2.class);
+        System.out.println(userService2);
+        userService2.update();
+    }
+
+    @Test
+    public void testAnnotate2(){
+        // 1. 加载Spring配置类
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        // 2. 获取Spring配置文件中创建的对象
+        UserService2 userService2= context.getBean("userService2", UserService2.class);
+        System.out.println(userService2);
+        userService2.update();
+
+    }
+    @Test
+    public void testAopAnnotateXml(){
+        // 1. 加载Spring配置类
+        ApplicationContext context = new ClassPathXmlApplicationContext("aop_annotate.xml");
+        // 2. 获取Spring配置文件中创建的对象
+        Person person= context.getBean("person", Person.class);
+        person.add();
+
+    }
+    @Test
+    public void testAopAnnotate(){
+        // 1. 加载Spring配置类
+        ApplicationContext context = new AnnotationConfigApplicationContext(AopConfig.class);
+        // 2. 获取Spring配置文件中创建的对象
+        Person person= context.getBean("person", Person.class);
+        person.add();
+
+    }
+
+    @Test
+    public void testAopXml(){
+        // 1. 加载Spring配置类
+        ApplicationContext context = new ClassPathXmlApplicationContext("aop_xml.xml");
+        // 2. 获取Spring配置文件中创建的对象
+        AopBook book= context.getBean("book", AopBook.class);
+        book.buy();
+
     }
 
 }

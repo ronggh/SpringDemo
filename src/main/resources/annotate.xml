@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+        开启组件扫描
+        如果是多个包，可以用逗号隔开
+        或写它们共同的上层包名
+     -->
+    <context:component-scan base-package="cn.annotate"></context:component-scan>
+
+    <!--
+        可以进行更精细化的配置
+        use-default-filters=false,表示不使用默认的filter,而是使用自定义的
+        include-filter:配置扫描哪些类型
+        exclude-filter:配置不扫描哪些类型
+     -->
+    <!--<context:component-scan base-package="cn.annotate" use-default-filters="false">-->
+        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"></context:include-filter>-->
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:exclude-filter>-->
+    <!--</context:component-scan>-->
+
+</beans>
