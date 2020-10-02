@@ -1,14 +1,19 @@
-package testsprint;
+package testspring;
 
 import aop.aspectj.annotate.AopConfig;
 import aop.aspectj.annotate.Person;
 import aop.aspectj.xml.AopBook;
+import basic.User1;
+import basic.User2;
+import basic.User3;
 import cn.annotate.config.SpringConfig;
 import cn.annotate.service.UserService2;
 import beanperiod.Order;
 import collectiontype.Book;
 import collectiontype.Course;
 import collectiontype.Student;
+import jdbc.entity.JdbcBook;
+import jdbc.service.JdbcBookService;
 import org.junit.Test;
 
 import org.springframework.context.ApplicationContext;
@@ -17,29 +22,110 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import service.UserService;
-import springdemo.Emp;
-import springdemo.User;
+import basic.Emp;
 
 
 public class TestSpringDemo {
+    /**
+     * 1. 测试Bean的创建
+     */
     @Test
-    public void testAdd(){
+    public void testUser1Add(){
         // 1. 加载Spring配置文件
-        ApplicationContext context = new ClassPathXmlApplicationContext("user.xml");
+        // ApplicationContext 换成 BeanFactory 也行
+        // BeanFactory:是IOC容器基本实现，是Spring内部的使用接口，不提供开发人员进行使用
+        //              加载配置文件时候不会创建对象，在获取对象（使用）才去创建对象（即懒加载）
+        // ApplicationContext: 是BeanFactory接口的子接口，提供更多更强大的功能，一般由开发人员进行使用
+        // 加载配置文件时候就会把在配置文件对象进行创建
+
+        ApplicationContext context = new ClassPathXmlApplicationContext(
+                "user1.xml");
         // 2. 获取Spring配置文件中创建的对象
-        User user = context.getBean("user",User.class);
+        //
+        User1 user = context.getBean("user1",User1.class);
         System.out.println(user.toString());
         user.add();
+    }
 
+    /**
+     *  2. 测试通过 property 注入属性值
+     */
+    @Test
+    public void testUser2Property(){
+        // 1. 加载Spring配置文件
+       ApplicationContext context = new ClassPathXmlApplicationContext(
+                "user2.xml");
+        // 2. 获取Spring配置文件中创建的对象
+        //
+        User2 user = context.getBean("user2", User2.class);
+        System.out.println(user.toString());
+        user.testProperty();
+    }
 
-        User user1 = context.getBean("user1",User.class);
-        System.out.println(user1.toString());
+    /**
+     *  3. 测试通过 有参构造函数 注入属性值
+     */
+    @Test
+    public void testUser3Constructor(){
+        // 1. 加载Spring配置文件
+        ApplicationContext context = new ClassPathXmlApplicationContext(
+                "user3.xml");
+        // 2. 获取Spring配置文件中创建的对象
+        //r
+        User3 user = context.getBean("user3", User3.class);
+        System.out.println(user.toString());
+        user.test();
+    }
+
+    /**
+     *  4. 测试通过 p名称空间注入属性值
+     */
+    @Test
+    public void testUser2pNameSpace(){
+        // 1. 加载Spring配置文件
+        ApplicationContext context = new ClassPathXmlApplicationContext(
+                "user4.xml");
+        // 2. 获取Spring配置文件中创建的对象
+        //
+        User2 user = context.getBean("user4", User2.class);
+        System.out.println(user.toString());
+        user.testProperty();
+    }
+
+    /**
+     *  5. 测试注入属性值为 null
+     */
+    @Test
+    public void testUser2Null(){
+        // 1. 加载Spring配置文件
+        ApplicationContext context = new ClassPathXmlApplicationContext(
+                "user5.xml");
+        // 2. 获取Spring配置文件中创建的对象
+        //
+        User2 user = context.getBean("user5", User2.class);
+        System.out.println(user.toString());
+        user.testProperty();
+    }
+
+    /**
+     *  6. 测试 属性值中含有特殊字符
+     */
+    @Test
+    public void testUser2SpecString(){
+        // 1. 加载Spring配置文件
+        ApplicationContext context = new ClassPathXmlApplicationContext(
+                "user6.xml");
+        // 2. 获取Spring配置文件中创建的对象
+        //
+        User2 user = context.getBean("user6", User2.class);
+        System.out.println(user.toString());
+        user.testProperty();
     }
 
     @Test
     public void testService(){
         // 1. 加载Spring配置文件
-        ApplicationContext context = new ClassPathXmlApplicationContext("user2.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("user200.xml");
         // 2. 获取Spring配置文件中创建的对象
         UserService userService = context.getBean("userService",UserService.class);
         userService.add();
@@ -160,6 +246,17 @@ public class TestSpringDemo {
         // 2. 获取Spring配置文件中创建的对象
         AopBook book= context.getBean("book", AopBook.class);
         book.buy();
+
+    }
+
+    @Test
+    public void testJdbcAdd(){
+        // 1. 加载Spring配置类
+        ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_template.xml");
+        // 2. 获取Spring配置文件中创建的对象
+        JdbcBookService bookService = context.getBean("jdbcBookService", JdbcBookService.class);
+
+       bookService.add(new JdbcBook("1","Java 编程思想","1"));
 
     }
 

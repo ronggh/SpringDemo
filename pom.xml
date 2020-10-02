@@ -7,6 +7,7 @@
     <groupId>cn.alan</groupId>
     <artifactId>SpringDemo</artifactId>
     <version>1.0</version>
+
     <properties>
         <spring-version>5.2.7.RELEASE</spring-version>
     </properties>
@@ -14,9 +15,15 @@
         <!-- Spring核心模块 -->
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <version>${spring-version}</version>
         </dependency>
+        <!-- Spring Context -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -27,11 +34,7 @@
             <artifactId>spring-context-support</artifactId>
             <version>${spring-version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring-version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
@@ -52,6 +55,19 @@
             <version>1.9.5</version>
         </dependency>
 
+        <!-- Sprint JdbcTemplate -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+
+        <!-- MySQL Connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.40</version>
+        </dependency>
 
         <!--测试依赖 -->
         <dependency>
@@ -60,8 +76,5 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
-
-
     </dependencies>
 </project>

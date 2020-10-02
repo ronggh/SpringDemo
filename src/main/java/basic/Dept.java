@@ -1,4 +1,4 @@
-package springdemo;
+package basic;
 
 public class Dept {
     private String deptName;

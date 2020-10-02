@@ -4,9 +4,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- 配置 User2类对象的创建 -->
-    <bean id="user2" class="basic.User2">
+    <bean id="user6" class="basic.User2">
         <!--使用property完成属性注入 name：类里面属性名称 value：向属性注入的值 -->
-        <property name="userName" value="张三"/>
+        <property name="userName">
+            <value>
+                <![CDATA[<<南京>>]]>
+            </value>
+        </property>
         <property name="age" value="20"/>
     </bean>
 </beans>

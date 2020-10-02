@@ -2,11 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-    <!-- 配置 User2类对象的创建 -->
-    <bean id="user2" class="basic.User2">
-        <!--使用property完成属性注入 name：类里面属性名称 value：向属性注入的值 -->
-        <property name="userName" value="张三"/>
-        <property name="age" value="20"/>
+    <!-- 配置 User3类对象的创建 -->
+    <bean id="user3" class="basic.User3">
+        <!-- 使用有参构造函数完成属性注入 name：类里面属性名称 value：向属性注入的值 -->
+        <constructor-arg name="userName" value="张飞"/>
+        <constructor-arg name="age" value="30"/>
     </bean>
 </beans>

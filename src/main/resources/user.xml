@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!-- Spring 创建对象-->
-    <bean id="user" class="springdemo.User">
+    <bean id="user" class="basic.User">
         <!-- 注入属性 -->
         <property name="userName" value="Tom"></property>
         <property name="age" value="30"></property>
@@ -21,7 +21,7 @@
     </bean>
 
     <!-- 有参构造函数 -->
-    <bean id="user1" class="springdemo.User">
+    <bean id="user1" class="basic.User">
         <constructor-arg name="userName" value="Peter"/>
         <constructor-arg name="age" value="50"/>
     </bean>

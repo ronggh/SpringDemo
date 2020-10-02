@@ -1,16 +1,9 @@
-package springdemo;
+package basic;
 
 public class User {
-    //
     private String userName;
     private int age;
-
-
-
     private String address;
-
-    //
-
 
     public String getUserName() {
         return userName;
