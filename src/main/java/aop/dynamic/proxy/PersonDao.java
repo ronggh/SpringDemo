@@ -1,6 +1,6 @@
 package aop.dynamic.proxy;
 
 public interface PersonDao {
-    public int add(int a,int b);
-    public String update(String id);
+    int add(int a,int b);
+    String update(String id);
 }

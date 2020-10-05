@@ -12,5 +12,5 @@
     </bean>
 
     <!-- 配置后置处理器,对当前配置文件中的所有bean实例添加后置处理器 -->
-    <bean id="myBeanPost" class="beanperiod.MyBeanPost"></bean>
+    <bean id="myBeanPost" class="beanperiod.MyBeanPostProcessor"></bean>
 </beans>

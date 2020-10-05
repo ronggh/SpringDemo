@@ -14,7 +14,7 @@ public class Student {
     // 3. Map类型的属性
     private Map<String,String> maps;
     // 4. Set类型的属性
-    private Set<String > sets;
+    private Set<String> sets;
     // 5. 集合中是另外的类
     private List<Course> courseList;
 

@@ -7,7 +7,5 @@
         <!-- 注入userDao -->
         <property name="userDao" ref="userDao"></property>
     </bean>
-    <bean id="userDao" class="dao.UserDao">
-
-    </bean>
+    <bean id="userDao" class="dao.UserDao"></bean>
 </beans>

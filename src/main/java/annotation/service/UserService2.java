@@ -1,8 +1,7 @@
-package cn.annotate.service;
+package annotation.service;
 
-import cn.annotate.dao.UserDao2;
+import annotation.dao.UserDao2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,14 +12,13 @@ import javax.annotation.Resource;
 @Service
 public class UserService2 {
     // 注入dao属性,不需要设置set方法
-//    @Autowired // 根据类型进行属性注入
-    @Resource(name = "userDao22")  // 根据名称进行注入
+    @Autowired // 根据类型进行属性注入
+//    @Resource(name = "userDao2")  // 根据名称进行注入
     private UserDao2 userDao2;
-
 
     //
     public void update(){
-        System.out.println("service update.....");
+        System.out.println("UserService2 update.....");
         userDao2.update();
     }
 }

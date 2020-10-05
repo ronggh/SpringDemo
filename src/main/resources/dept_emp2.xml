@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="emp" class="basic.Emp">
+        <!-- 属性 -->
+        <property name="empName" value="John"/>
+        <property name="gender" value="女"/>
+        <!-- 级联赋值,第一种写法,直接指定 -->
+        <property name="dept" ref="dept"/>
+        <property name="dept.deptName" value="技术部"/>
+
+    </bean>
+    <bean id="dept" class="basic.Dept">
+        <!--  级联赋值,第二种写法 -->
+        <property name="deptName" value="财务部"/>
+    </bean>
+</beans>

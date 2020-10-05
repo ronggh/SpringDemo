@@ -11,6 +11,10 @@ public class Emp {
         this.dept = dept;
     }
 
+    public Dept getDept() {
+        return dept;
+    }
+
     public void setEmpName(String empName) {
         this.empName = empName;
     }
