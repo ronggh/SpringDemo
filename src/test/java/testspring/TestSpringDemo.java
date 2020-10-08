@@ -12,8 +12,7 @@ import beanperiod.Order;
 import collectiontype.Book;
 import collectiontype.Course;
 import collectiontype.Student;
-import jdbc.entity.JdbcBook;
-import jdbc.service.JdbcBookService;
+
 import org.junit.Test;
 
 import org.springframework.context.ApplicationContext;
@@ -23,6 +22,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import basic.Emp;
 import service.UserService;
+
+import java.util.List;
 
 
 public class TestSpringDemo {
@@ -265,8 +266,23 @@ public class TestSpringDemo {
         userService2.update();
     }
 
+
+
     /**
-     * 18.
+     * 18. AspectJ纯注解方式操作AOP
+     */
+    @Test
+    public void testAopAnnotate() {
+        // 1. 加载Spring配置类
+        ApplicationContext context = new AnnotationConfigApplicationContext(AopConfig.class);
+        // 2. 获取Spring配置文件中创建的对象
+        Person person = context.getBean("person", Person.class);
+        person.add();
+    }
+
+
+    /**
+     * 19. AspectJ 注解方式+xml配置文件方式操作AOP
      */
     @Test
     public void testAopAnnotateXml() {
@@ -275,19 +291,11 @@ public class TestSpringDemo {
         // 2. 获取Spring配置文件中创建的对象
         Person person = context.getBean("person", Person.class);
         person.add();
-
     }
 
-    @Test
-    public void testAopAnnotate() {
-        // 1. 加载Spring配置类
-        ApplicationContext context = new AnnotationConfigApplicationContext(AopConfig.class);
-        // 2. 获取Spring配置文件中创建的对象
-        Person person = context.getBean("person", Person.class);
-        person.add();
-
-    }
-
+    /**
+     * 20. AspectJ xml配置文件方式操作AOP
+     */
     @Test
     public void testAopXml() {
         // 1. 加载Spring配置类
@@ -297,16 +305,4 @@ public class TestSpringDemo {
         book.buy();
 
     }
-
-    @Test
-    public void testJdbcAdd() {
-        // 1. 加载Spring配置类
-        ApplicationContext context = new ClassPathXmlApplicationContext("jdbc_template.xml");
-        // 2. 获取Spring配置文件中创建的对象
-        JdbcBookService bookService = context.getBean("jdbcBookService", JdbcBookService.class);
-
-        bookService.add(new JdbcBook("1", "Java 编程思想", "1"));
-
-    }
-
 }

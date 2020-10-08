@@ -14,6 +14,4 @@ public class PersonProxy2 {
     public void before() {
         System.out.println("PersonProxy2 before....");
     }
-
-
 }
