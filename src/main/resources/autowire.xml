@@ -6,7 +6,7 @@
     <!--
         自动装配
         autowire属性：
-            byName:bean 的id值要与类中属性名称相同
+            byName:annotation.bean 的id值要与类中属性名称相同
             byType:相同类型的bean只能有一个，不能多个，多个就无法进行一一对应了，不知道要使用哪一个
     -->
     <bean id="emp" class="autowire.Emp" autowire="byName">

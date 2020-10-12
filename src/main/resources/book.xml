@@ -13,7 +13,7 @@
         <value>Java从入门到精通</value>
         <value>Java设计模式</value>
     </util:list>
-    <!-- bean 中的属性scope 可以用来设置创建的对象是单实例（默认），还是多实例
+    <!-- annotation.bean 中的属性scope 可以用来设置创建的对象是单实例（默认），还是多实例
         singleton：单实例，默认
         prototype:多实例
      -->

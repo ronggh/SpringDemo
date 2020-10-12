@@ -8,4 +8,5 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @ComponentScan(basePackages = {"aop.aspectj.annotate"})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class AopConfig {
+
 }

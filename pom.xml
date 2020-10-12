@@ -12,48 +12,58 @@
         <spring-version>5.2.7.RELEASE</spring-version>
     </properties>
     <dependencies>
-        <!-- Spring核心模块 -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${spring-version}</version>
-        </dependency>
-        <!-- Spring Context -->
+
+        <!-- Spring Context，实际上这个包包含了core,beans,expression,aop 4个模块 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring-version}</version>
         </dependency>
+        <!-- Spring核心模块，导入context包中已包含该模块 -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-core</artifactId>-->
+            <!--<version>${spring-version}</version>-->
+        <!--</dependency>-->
+        <!-- spring beans , 导入context包中已包含该模块 -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-beans</artifactId>-->
+            <!--<version>${spring-version}</version>-->
+        <!--</dependency>-->
+        <!-- spring expression, 导入context包中已包含该模块 -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-expression</artifactId>-->
+            <!--<version>${spring-version}</version>-->
+        <!--</dependency>-->
+
+        <!-- 使用注解方式，需要引入aop ,导入context包中已包含该模块 -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-aop</artifactId>-->
+            <!--<version>${spring-version}</version>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
             <version>${spring-version}</version>
         </dependency>
 
+        <!-- spring aspects,集成进了aspectjweaver  -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-expression</artifactId>
+            <artifactId>spring-aspects</artifactId>
             <version>${spring-version}</version>
         </dependency>
 
-        <!-- 使用注解方式，需要引入aop -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${spring-version}</version>
-        </dependency>
-
-        <!-- aspectj -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.9.5</version>
-        </dependency>
+        <!-- aspectj，已经集成进 spring-aspects -->
+        <!--<dependency>-->
+            <!--<groupId>org.aspectj</groupId>-->
+            <!--<artifactId>aspectjweaver</artifactId>-->
+            <!--<version>1.9.5</version>-->
+        <!--</dependency>-->
 
         <!-- Sprint JdbcTemplate -->
         <dependency>
@@ -76,5 +86,13 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- @Inject 注解的依赖包 -->
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+
     </dependencies>
 </project>

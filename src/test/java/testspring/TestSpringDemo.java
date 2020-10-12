@@ -1,13 +1,29 @@
 package testspring;
 
+import annotation.autowired.AutowiredConfig;
+import annotation.aware.AwareConfig;
+import annotation.aware.Boss;
+import annotation.bean.PersonBean;
+import annotation.config.SpringConfigBean;
+import annotation.config.SpringConfigFactoryBean;
+import annotation.config.SpringConfigImport;
+import annotation.dao.UserDao2;
+import annotation.period.Car;
+import annotation.period.Cat;
+import annotation.period.Dog;
+import annotation.period.PeriodConfig;
+import annotation.profile.ProfileConfig;
 import annotation.service.UserService2;
 import aop.aspectj.annotate.AopConfig;
+import aop.aspectj.annotate.MathDiv;
+import aop.aspectj.annotate.MathDivConfig;
 import aop.aspectj.annotate.Person;
 import aop.aspectj.xml.AopBook;
 import basic.User1;
 import basic.User2;
 import basic.User3;
-import annotation.config.SpringConfig;
+import annotation.config.SpringConfigComponentScan;
+
 import beanperiod.Order;
 import collectiontype.Book;
 import collectiontype.Course;
@@ -15,16 +31,15 @@ import collectiontype.Student;
 
 import org.junit.Test;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import basic.Emp;
 import service.UserService;
-
-import java.util.List;
-
 
 public class TestSpringDemo {
     /**
@@ -259,13 +274,12 @@ public class TestSpringDemo {
     @Test
     public void testAnnotationConfigClass() {
         // 1. 加载Spring配置类
-        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfigComponentScan.class);
         // 2. 获取Spring配置文件中创建的对象
         UserService2 userService2 = context.getBean("userService2", UserService2.class);
         System.out.println(userService2);
         userService2.update();
     }
-
 
 
     /**
@@ -298,11 +312,175 @@ public class TestSpringDemo {
      */
     @Test
     public void testAopXml() {
-        // 1. 加载Spring配置类
+        // 1. 加载Spring配置文件
         ApplicationContext context = new ClassPathXmlApplicationContext("aop_xml.xml");
         // 2. 获取Spring配置文件中创建的对象
         AopBook book = context.getBean("book", AopBook.class);
         book.buy();
-
     }
+
+    /**
+     * 21. 测试通过 @Import方式导入组件
+     */
+    @Test
+    public void testImportBean() {
+        // 1. 加载Spring配置文件
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfigImport.class);
+
+        // 2. 获取注册的组件信息
+        String[] definitionNames = context.getBeanDefinitionNames();
+        // 3. 输出
+        for (String item : definitionNames) {
+            System.out.println(item);
+        }
+    }
+
+    /**
+     * 22. @Bean方式创建对象
+     */
+    @Test
+    public void testAtBean() {
+        // 1. 加载Spring配置类
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfigBean.class);
+        System.out.println("IOC容器创建好了。");
+        // 2. 获取Spring配置文件中创建的对象
+        PersonBean personBean = context.getBean(PersonBean.class);
+        System.out.println(personBean);
+
+        PersonBean personBean2 = (PersonBean) context.getBean("pBean");
+        System.out.println(personBean2);
+        System.out.println(personBean == personBean2);
+
+        String[] namesForType = context.getBeanNamesForType(PersonBean.class);
+        for (String name : namesForType) {
+            System.out.println(" ===> " + name);
+        }
+    }
+
+    /**
+     * 23. 测试包扫描的方式
+     */
+    @Test
+    public void testComponentScan() {
+        // 1. 加载Spring配置类
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfigComponentScan.class);
+        // 2. 获取容器中所有注册的组件
+        String[] names = context.getBeanDefinitionNames();
+        if (null != names && names.length > 1) {
+            for (String name : names) {
+                System.out.println(" ===> " + name);
+            }
+        }
+    }
+
+    /**
+     * 24. 测试通过FactoryBean创建实例
+     */
+    @Test
+    public void testFactoryBean() {
+        // 1. 加载Spring配置类
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfigFactoryBean.class);
+        // 2. 获取容器中注册的组件,
+        // ２.1 通过工厂Bean获取的是getObject()中创建的对象
+        Object myFactoryBean = context.getBean("myFactoryBean");
+        System.out.println("bean的类型：" + myFactoryBean.getClass());
+        // 2.2 加个 &符号，可以获取工厂类型本身
+        Object myFactoryBean2 = context.getBean("&myFactoryBean");
+        System.out.println("bean2的类型：" + myFactoryBean2.getClass());
+    }
+
+    /**
+     * 25. 测试Bean的生命周期
+     */
+    @Test
+    public void testBeanPeriod() {
+        // 1. 加载Spring配置类
+        ApplicationContext context = new AnnotationConfigApplicationContext(PeriodConfig.class);
+        System.out.println("容器创建完成．．．");
+        // 2.获取Bean
+        Car car = context.getBean(Car.class);
+        System.out.println(car);
+
+        Cat cat = context.getBean(Cat.class);
+        System.out.println(cat);
+
+        Dog dog = context.getBean(Dog.class);
+        System.out.println(dog);
+
+        // 3. 关闭容器
+        ((AnnotationConfigApplicationContext) context).close();
+    }
+
+    /**
+     * 26. 测试自动装配 @Autowired
+     */
+    @Test
+    public void testAutowired() {
+        // 1. 加载Spring配置类
+        ApplicationContext context = new AnnotationConfigApplicationContext(AutowiredConfig.class);
+        System.out.println("容器创建完成．．．");
+        // 2.
+        UserService2 userService2 = context.getBean(UserService2.class);
+        UserDao2 userDao2 = (UserDao2) context.getBean("userDao2");
+
+        System.out.println(userService2);
+        System.out.println(userDao2);
+
+        // 3.
+        ((AnnotationConfigApplicationContext) context).close();
+    }
+
+    /**
+     * 27. 测试 Aware注入Spring底层组件
+     */
+    @Test
+    public void testAware() {
+        // 1. 加载Spring配置类
+        ApplicationContext context = new AnnotationConfigApplicationContext(AwareConfig.class);
+        System.out.println("容器创建完成．．．");
+
+        //
+        Boss boss = context.getBean(Boss.class);
+        System.out.println(boss);
+        System.out.println("测试的ApplicationContext：" + context);
+    }
+
+    /**
+     * 28. 测试@Profile，根据激活的环境切换要注册的组件
+     */
+    @Test
+    public void testProfile() {
+        // 加载Spring配置类, 用这种方式来激活不同的环境
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.getEnvironment().setActiveProfiles("dev");
+        context.register(ProfileConfig.class);
+        context.refresh();
+        System.out.println("容器创建完成．．．");
+
+        // 遍历组件
+        String[] names = context.getBeanDefinitionNames();
+        for (String name : names) {
+            System.out.println("Bean name ===> " + name);
+        }
+
+        //
+        context.close();
+    }
+
+    /**
+     * 29.测试AOP一个容易理解的例子
+     */
+    @Test
+    public void testAopExample(){
+        // 1. 加载Spring配置类
+        ApplicationContext context = new AnnotationConfigApplicationContext(MathDivConfig.class);
+        System.out.println("容器创建完成．．．");
+
+        MathDiv mathDiv = context.getBean(MathDiv.class);
+        mathDiv.div(6,2);
+    }
+
+    /**
+     * 30.
+     */
 }
